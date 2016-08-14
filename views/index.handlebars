@@ -1,0 +1,27 @@
+<div>
+	<img src="https://images7.alphacoders.com/381/381583.jpg" id="background1"/>
+	</div>
+
+	<div>
+	<img src="http://www.oocities.org/wildboutpoke/pokemontitle.gif" id="title"/>
+	</div>
+
+	<div>
+	<img src="http://www.geocities.ws/pokemontours2/indexes/objects/pokedex1.gif" id="pokedex"/>
+	</div>
+
+	<div>
+	<img src="http://vignette3.wikia.nocookie.net/youtubepoop/images/4/4c/Pokeball.png/revision/latest?cb=20150418234807" id="mainPokeball"/>
+	</div>
+
+	<script>
+		new Audio('pokemon.mp3').play();
+
+		$('#mainPokeball').on('click', function(){
+			location.href = 'http://localhost:3000/catch';
+		})
+
+		$('#pokedex').on('click', function(){
+			location.href = 'http://localhost:3000/pokedex';
+		})
+	</script>

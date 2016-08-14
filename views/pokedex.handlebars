@@ -1,0 +1,36 @@
+<div>
+	<img src="http://orig07.deviantart.net/282f/f/2010/051/7/9/pokedex_template_by_highlighterjuice.png" id="background3"/>
+</div>
+
+<div id="list">
+	<ul id="total">
+
+	</ul>
+</div>
+
+<script>
+	$(document).ready(function(){
+			
+
+			$.ajax({
+			    type: "GET",
+			    url: 'http://localhost:3000/info',
+			    // Set the data to fetch as jsonp to avoid same-origin policy
+			    dataType: "json",
+			    async: true,
+			    success: function(data) {
+			      // If the ajax call is successfull, add the name to the "name" span
+			      //console.log(data);
+
+			      for(i=0; i<data.names.length; i++){
+			      	//alert(data.names[i]);
+			      	$('#total').append('<li><a href="" class="friend">' + data.names[i] + '</a></li>')
+			      }
+			    }
+			  });
+		
+		$('.friend').on('click', function(){
+			console.log(this);
+		})
+})
+</script>

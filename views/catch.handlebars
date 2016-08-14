@@ -1,0 +1,71 @@
+<div>
+	<img src="http://orig12.deviantart.net/b598/f/2014/310/a/6/pokemon_x_and_y_forest_battle_background_by_phoenixoflight92-d85ijvr.png" id="background2"/>
+	</div>
+
+	<div>
+	<img src="http://img08.deviantart.net/20bd/i/2010/231/7/1/pokeball_template_by_poke_lab.png" id="pokeball"/>
+	</div>
+
+	<div id="container">
+		<img src="" id="pokemon"/>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			var pokemon;
+			var pokeball = 'http://img08.deviantart.net/20bd/i/2010/231/7/1/pokeball_template_by_poke_lab.png';
+			new Audio('music.mp3').play();
+			var random = Math.floor(Math.random() * 700);
+			var genericImage = ('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + random + '.png');
+			$('#pokemon').attr('src', genericImage);
+			var dataRequest = 'http://pokeapi.co/api/v1/pokemon/' + random + '/';
+
+			function catchPokemon(){
+				console.log(pokemon);
+				var result;
+				var decision = Math.floor(Math.random() * 2);
+				if(decision == 0){
+					result = false;
+				}
+				else{
+					result = true;
+				}
+				if(!result){
+					setTimeout(function(){ alert('Sorry, it broke out of the Pokeball and ran away!'); }, 300);
+					
+				}
+				else{
+
+					setTimeout(function(){ alert('Congratulations! You caught it!'); }, 300);
+
+					$.post('http://localhost:3000/', {
+						name: pokemon
+					});
+					
+				}
+
+				setTimeout(function(){ location.href = 'http://localhost:3000/';}, 500);
+			}
+
+			$.ajax({
+			    type: "GET",
+			    url: dataRequest,
+			    // Set the data to fetch as jsonp to avoid same-origin policy
+			    dataType: "jsonp",
+			    async: true,
+			    success: function(data) {
+			      // If the ajax call is successfull, add the name to the "name" span
+			      pokemon = data.name;
+			     setTimeout(function(){ alert('A wild ' + data.name + ' has appeared'); }, 100);
+			    }
+			  });
+		
+		$('#pokeball').on('click', function(){
+			this.remove();
+			$('#pokemon').attr('src', pokeball).width(100).height(50).css('top', '300px').css('left', '600px');
+			catchPokemon();			
+
+
+		})
+})
+	</script>
