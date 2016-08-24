@@ -14,7 +14,7 @@
 		$(document).ready(function(){
 			var pokemon;
 			var pokeball = 'http://img08.deviantart.net/20bd/i/2010/231/7/1/pokeball_template_by_poke_lab.png';
-			new Audio('music.mp3').play();
+			new Audio('encounter.mp3').play();
 			var random = Math.floor(Math.random() * 700);
 			var genericImage = ('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + random + '.png');
 			$('#pokemon').attr('src', genericImage);
@@ -56,7 +56,7 @@
 			    success: function(data) {
 			      // If the ajax call is successfull, add the name to the "name" span
 			      pokemon = data.name;
-			     setTimeout(function(){ alert('A wild ' + data.name + ' has appeared'); }, 100);
+			     alert('A wild ' + data.name + ' has appeared');
 			    }
 			  });
 		

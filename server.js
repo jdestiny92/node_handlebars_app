@@ -17,6 +17,8 @@ connection.connect(function(err) {
 
 var app = express();
 
+app.use(express.static('music'));
+
 var exphbs = require('express-handlebars');
 
 app.engine('handlebars', exphbs({
@@ -38,6 +40,12 @@ app.post('/', function(req, res){
 		if (err) throw err;
 	});
 
+})
+
+app.post('/:pokemon', function(req, res){
+	var pokemon = req.pokemon;
+
+	res.render('http://www.pokemon.com/us/pokedex/' + pokemon);
 })
 
 app.get('/', function(req, res){

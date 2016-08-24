@@ -15,22 +15,37 @@
 			$.ajax({
 			    type: "GET",
 			    url: 'http://localhost:3000/info',
-			    // Set the data to fetch as jsonp to avoid same-origin policy
 			    dataType: "json",
 			    async: true,
-			    success: function(data) {
-			      // If the ajax call is successfull, add the name to the "name" span
-			      //console.log(data);
+			    success: function(data){
 
 			      for(i=0; i<data.names.length; i++){
-			      	//alert(data.names[i]);
-			      	$('#total').append('<li><a href="" class="friend">' + data.names[i] + '</a></li>')
-			      }
+			      	var pokemon = data.names[i];
+			      	pokemon = pokemon.toLowerCase();
+			      	var link = 'http://pokeapi.co/api/v2/pokemon/' + pokemon + '/';
+
+			      	$.ajax({
+					    type: "GET",
+					    url: link,
+					    dataType: "json",
+					    async: true,
+					    success: function(info) {
+
+					     //console.log(info.sprites.front_default);
+
+					     $('#total').append('<img src="' + info.sprites.front_default + '" class="sprite" />');
+			    		}
+			      	
+			      });
+
 			    }
-			  });
+
+			    }
+
+			  })
 		
-		$('.friend').on('click', function(){
-			console.log(this);
-		})
+	$('li').on('click', function(){
+		console.log(this);
+	})
 })
 </script>
