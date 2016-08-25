@@ -20,6 +20,19 @@
 			$('#pokemon').attr('src', genericImage);
 			var dataRequest = 'http://pokeapi.co/api/v1/pokemon/' + random + '/';
 
+			$.ajax({
+			    type: "GET",
+			    url: dataRequest,
+			    // Set the data to fetch as jsonp to avoid same-origin policy
+			    dataType: "jsonp",
+			    async: true,
+			    success: function(data) {
+			      // If the ajax call is successfull, add the name to the "name" span
+			      pokemon = data.name;
+			     alert('A wild ' + data.name + ' has appeared');
+			    }
+			  });
+			
 			function catchPokemon(){
 				console.log(pokemon);
 				var result;
@@ -47,18 +60,7 @@
 				setTimeout(function(){ location.href = 'http://localhost:3000/';}, 500);
 			}
 
-			$.ajax({
-			    type: "GET",
-			    url: dataRequest,
-			    // Set the data to fetch as jsonp to avoid same-origin policy
-			    dataType: "jsonp",
-			    async: true,
-			    success: function(data) {
-			      // If the ajax call is successfull, add the name to the "name" span
-			      pokemon = data.name;
-			     alert('A wild ' + data.name + ' has appeared');
-			    }
-			  });
+			
 		
 		$('#pokeball').on('click', function(){
 			this.remove();

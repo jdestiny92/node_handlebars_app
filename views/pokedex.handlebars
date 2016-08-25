@@ -11,6 +11,8 @@
 <script>
 	$(document).ready(function(){
 			
+			var link = 'http://www.pokemon.com/us/pokedex/';
+			var list = [];
 
 			$.ajax({
 			    type: "GET",
@@ -19,33 +21,26 @@
 			    async: true,
 			    success: function(data){
 
-			      for(i=0; i<data.names.length; i++){
+			    for(i=0; i<data.names.length; i++){
 			      	var pokemon = data.names[i];
 			      	pokemon = pokemon.toLowerCase();
-			      	var link = 'http://pokeapi.co/api/v2/pokemon/' + pokemon + '/';
+			      	list.push(pokemon);
 
-			      	$.ajax({
-					    type: "GET",
-					    url: link,
-					    dataType: "json",
-					    async: true,
-					    success: function(info) {
-
-					     //console.log(info.sprites.front_default);
-
-					     $('#total').append('<img src="' + info.sprites.front_default + '" class="sprite" />');
-			    		}
+			      	if(list.length%18 == 0){
+			      		$('#total').append('<li></br></li>');
+			      	}
 			      	
-			      });
-
+			      	$('#total').append('<li><a href="#" name="' + pokemon + '"' + '>' + pokemon + '</a></li>');
+					
 			    }
-
+			    	$('a').on('click', function(){
+						//console.log(this.name);
+						var website = (link + this.name);
+						location.href = website;
+					})
 			    }
 
 			  })
-		
-	$('li').on('click', function(){
-		console.log(this);
-	})
+	
 })
 </script>
