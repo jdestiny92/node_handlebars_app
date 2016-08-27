@@ -11,16 +11,10 @@
 	</div>
 
 	<script>
-		$(document).ready(function(){
-			var pokemon;
-			var pokeball = 'http://img08.deviantart.net/20bd/i/2010/231/7/1/pokeball_template_by_poke_lab.png';
-			new Audio('encounter.mp3').play();
-			var random = Math.floor(Math.random() * 700);
-			var genericImage = ('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + random + '.png');
-			$('#pokemon').attr('src', genericImage);
-			var dataRequest = 'http://pokeapi.co/api/v1/pokemon/' + random + '/';
-
-			$.ajax({
+		var pokemon;
+		var random = Math.floor(Math.random() * 700);
+		var dataRequest = 'http://pokeapi.co/api/v1/pokemon/' + random + '/';
+		$.ajax({
 			    type: "GET",
 			    url: dataRequest,
 			    // Set the data to fetch as jsonp to avoid same-origin policy
@@ -32,9 +26,18 @@
 			     alert('A wild ' + data.name + ' has appeared');
 			    }
 			  });
+		$(document).ready(function(){
+			
+			var pokeball = 'http://img08.deviantart.net/20bd/i/2010/231/7/1/pokeball_template_by_poke_lab.png';
+			new Audio('encounter.mp3').play();
+			//var random = Math.floor(Math.random() * 700);
+			var genericImage = ('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + random + '.png');
+			$('#pokemon').attr('src', genericImage);
+			//var dataRequest = 'http://pokeapi.co/api/v1/pokemon/' + random + '/';
+			
 			
 			function catchPokemon(){
-				console.log(pokemon);
+				//console.log(pokemon);
 				var result;
 				var decision = Math.floor(Math.random() * 2);
 				if(decision == 0){
@@ -48,26 +51,20 @@
 					
 				}
 				else{
-
 					setTimeout(function(){ alert('Congratulations! You caught it!'); }, 300);
-
 					$.post('http://localhost:3000/', {
 						name: pokemon
 					});
 					
 				}
-
 				setTimeout(function(){ location.href = 'http://localhost:3000/';}, 500);
 			}
-
 			
 		
 		$('#pokeball').on('click', function(){
 			this.remove();
 			$('#pokemon').attr('src', pokeball).width(100).height(50).css('top', '300px').css('left', '600px');
 			catchPokemon();			
-
-
 		})
 })
 	</script>
