@@ -10,6 +10,10 @@
 		<img src="" id="pokemon"/>
 	</div>
 
+	<div id="dialog" title="Trainer Tip!">
+	  <p>Please wait for the pokemon's name to be identified! Then press the pokeball to try and catch it!</p>
+	</div>
+
 	<script>
 		var pokemon;
 		var random = Math.floor(Math.random() * 700);
@@ -27,7 +31,12 @@
 			    }
 			  });
 		$(document).ready(function(){
-			
+
+			function show(){
+			$('#dialog').dialog();
+			}
+
+			setTimeout(show, 1000);
 			var pokeball = 'http://img08.deviantart.net/20bd/i/2010/231/7/1/pokeball_template_by_poke_lab.png';
 			new Audio('encounter.mp3').play();
 			//var random = Math.floor(Math.random() * 700);
