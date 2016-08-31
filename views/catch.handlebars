@@ -61,12 +61,12 @@
 				}
 				else{
 					setTimeout(function(){ alert('Congratulations! You caught it!'); }, 300);
-					$.post('http://localhost:3000/', {
+					$.post('/', {
 						name: pokemon
 					});
 					
 				}
-				setTimeout(function(){ location.href = 'http://localhost:3000/';}, 500);
+				setTimeout(function(){ location.href = '/';}, 500);
 			}
 			
 		
