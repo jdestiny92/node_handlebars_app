@@ -20,6 +20,7 @@ connection.connect(function(err) {
 var app = express();
 
 app.use(express.static('music'));
+app.use(express.static('node_modules'));
 
 var exphbs = require('express-handlebars');
 
