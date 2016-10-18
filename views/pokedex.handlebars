@@ -1,17 +1,39 @@
-<div>
-	<img src="http://orig07.deviantart.net/282f/f/2010/051/7/9/pokedex_template_by_highlighterjuice.png" id="background3"/>
-</div>
 
-<div id="list">
-	<ul id="total">
+<img src="http://orig07.deviantart.net/282f/f/2010/051/7/9/pokedex_template_by_highlighterjuice.png" id="background3" />
+<img src="#" id="pic3" style="position:relative; width:30vw; height:30vw; top:5vw; left:5vw;" />
+<p style="position:relative; top:18vh; left:8vw; width: 80vw;" id="text"></p>
+<p style="position:relative; bottom:12vh; left:70vw; width: 20vw;" id="weight"></p>
+<p style="position:relative; bottom:26vh; left:70vw; width: 20vw;" id="height"></p>
+<p style="position:relative; bottom:43vh; left:60vw; width: 20vw;" id="category"></p>
+<p style="position:relative; bottom:48vh; left:80vw; width: 20vw;" id="ability"></p>
+<p style="position:relative; bottom:64vh; left:50vw; width: 20vw;" id="number"></p>
+<button type="button" style="position:relative; bottom:49vh; left:43vw;" id="favorite">Pokemon List!</button>
+<button type="button" style="position:relative; bottom:54vh; left:35vw;" id="home">Home Page!</button>
 
-	</ul>
+
+
+<div id="dialog" title="List of Caught Pokemon">
+	<ul id="total" style="max-height: 30vw; overflow: auto;"></ul>
 </div>
 
 <script>
 	$(document).ready(function(){
+
+			$('#home').on('click', function(){
+				location.href = '/';
+			})
+
+			function show(){
+				$('#dialog').dialog();
+			}
+			setTimeout(show, 3000);
+
+			$('#favorite').on('click', function(){
+				$('#dialog').show();
+			});
 			
-			var link = 'http://www.pokemon.com/us/pokedex/';
+			$('#pic3').hide();
+
 			var list = [];
 
 			$.ajax({
@@ -34,9 +56,24 @@
 					
 			    }
 			    	$('a').on('click', function(){
-						//console.log(this.name);
-						var website = (link + this.name);
-						location.href = website;
+			    		$('#pic3').show();
+			    		//$('#total').remove();
+			    		$('#dialog').remove();
+						console.log(this.name);
+						//var website = (link + this.name);
+						//location.href = website;
+						var pokemon = this.name;
+
+						$.post('pokemon', {pokemon: pokemon}, function(data){
+							console.log(data);
+							$('#pic3').attr('src', data.link);
+							$('#text').html(data.text);
+							$('#weight').html(data.weight);
+							$('#height').html(data.height);
+							$('#category').html('Category: ' + data.category);
+							$('#ability').html('Ability: ' + data.ability);
+							$('#number').html(pokemon + ' ' + data.id);
+						})
 					})
 			    }
 
