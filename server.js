@@ -110,7 +110,7 @@ app.post('/pokemon', function(req, res){
             }
             
         })
-         console.log(result);
+         //console.log(result);
          res.json(result);
     })
    
